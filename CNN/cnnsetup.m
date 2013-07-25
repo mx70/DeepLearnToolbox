@@ -13,8 +13,8 @@ function net = cnnsetup(net, x, y)
         if strcmp(net.layers{l}.type, 'c')
             mapsize = mapsize - net.layers{l}.kernelsize + 1;
             fan_out = net.layers{l}.outputmaps * net.layers{l}.kernelsize ^ 2;
+            fan_in = inputmaps * net.layers{l}.kernelsize ^ 2;
             for j = 1 : net.layers{l}.outputmaps  %  output map
-                fan_in = inputmaps * net.layers{l}.kernelsize ^ 2;
                 for i = 1 : inputmaps  %  input map
                     net.layers{l}.k{i}{j} = (rand(net.layers{l}.kernelsize) - 0.5) * 2 * sqrt(6 / (fan_in + fan_out));
                 end
